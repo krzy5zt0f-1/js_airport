@@ -9,22 +9,26 @@ class Airport {
    get hangar() {
      return this._hangar;
    }
-   land(plane) {
+   land(plane, weather) {
      if (this._capacity === 0) {
        return "Airport full, unable to land!";
-     } else if (weather.con() === "stormy") {
+     } else if (weather === "stormy") {
        return "Bad weather, cannot land now!"
      }else {
      this._hangar.push(plane);
      this._capacity -= 1;
    }
    }
-   takeOff(plane) {
+   takeOff(plane, weather) {
+     if (weather === "stormy") {
+       return "Bad weather, cannot take off now!";
+     } else {
      this._hangar = this._hangar.filter(inHangar => {
        return inHangar !== plane;
      });
      this._capacity += 1;
-     return `${plane} took off!`
+     return `${plane} took off!`;
+   }
    }
 
  }
